@@ -1,0 +1,23 @@
+server:
+  port: 9012
+
+
+eureka:
+  instance:
+    hostname: localhost
+  
+spring:
+  application:
+    name: student-api
+  cloud:
+    gateway:
+      routes:
+        - id: student_service
+          uri: lb://student_service
+          predicates:
+            - Path=/student/**
+        - id: student_details
+          uri: lb://student_details
+          predicates:
+            - Path=/details/**
+
