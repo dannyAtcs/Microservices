@@ -2,6 +2,7 @@ server:
   port: 9012
 
 
+ 
 eureka:
   instance:
     hostname: localhost
@@ -9,15 +10,17 @@ eureka:
 spring:
   application:
     name: student-api
+  main:
+    web-application-type: reactive
   cloud:
     gateway:
       routes:
-        - id: student_service
-          uri: lb://student_service
+        - id: student-service
+          uri: lb://student-service
           predicates:
             - Path=/student/**
-        - id: student_details
-          uri: lb://student_details
+        - id: student-details
+          uri: lb://student-details
           predicates:
             - Path=/details/**
 

@@ -15,7 +15,7 @@ import com.student.service.StudentService1;
 
 
 @RestController
-@RequestMapping("/stud")
+@RequestMapping("/student")
 public class StudentController {
 
 	@Autowired(required=true)
@@ -26,16 +26,18 @@ public class StudentController {
 	
 
 	
-	@GetMapping("/{student_id}")
-	public Student getStudent(@PathVariable Long student_id)
+	@GetMapping("/{id}")
+	public Student getStudent(@PathVariable("id") Long student_id)
 	{
 		
 		Student student = this.studentService.getStudent(student_id);
 		
-		List details = this.restTemplate.getForObject("http://studentdetails-service/details/stud" + student.getStudent_id(),List.class);
+		List details = this.restTemplate.getForObject("http://student-details/details/student/" + student.getStudent_id(),List.class);
 		
 		student.setList(details);
 		return student;
+		
+		
 		
 	}
 	
